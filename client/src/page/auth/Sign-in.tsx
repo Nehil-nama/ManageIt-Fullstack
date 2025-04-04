@@ -24,6 +24,7 @@ import GoogleOauthButton from "@/components/auth/google-oauth-button";
 import { loginMutationFn } from "@/lib/api";
 import { useMutation } from "@tanstack/react-query";
 import { toast } from "@/hooks/use-toast";
+import { Loader } from "lucide-react";
 
 const SignIn = () => {
   const navigate = useNavigate();
@@ -57,6 +58,7 @@ const SignIn = () => {
     mutate(values, {
       onSuccess: (data) => {
         const user = data.user;
+        console.log(user);
         const decodedUrl = returnUrl ? decodeURIComponent(returnUrl) : null;
         navigate(decodedUrl || `/workspace/${user.currentWorkspace}`);
       },
@@ -78,7 +80,7 @@ const SignIn = () => {
           className="flex items-center gap-2 self-center font-medium"
         >
           <Logo />
-          Team Sync.
+          ManageIt
         </Link>
         <div className="flex flex-col gap-6">
           <Card>
@@ -153,7 +155,12 @@ const SignIn = () => {
                           )}
                         />
                       </div>
-                      <Button type="submit" className="w-full">
+                      <Button
+                        disabled = {isPending} 
+                        type="submit" 
+                        className="w-full"
+                      >
+                        {isPending && <Loader className = "animate-spin" />}
                         Login
                       </Button>
                     </div>
