@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect } from "react";
+import { createContext, useContext } from "react";
 import useWorkspaceId from "@/hooks/use-workspace-id";
 import useAuth from "@/hooks/api/use-auth";
 import { UserType, WorkspaceType } from "@/types/api.type";
@@ -42,9 +42,15 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const workspace = workspaceData?.workspace;
 
-  console.log(workspaceError, "workspaceError");
+  // console.log(workspaceError, "workspaceError");
 
-  useEffect(() => {});
+  // useEffect(() => {
+  //   if (workspaceError) {
+  //     if (workspaceError?.errorCode === "ACCESS_UNAUTHORIZED") {
+  //       navigate("/"); // Redirect if the user is not a member of the workspace
+  //     }
+  //   }
+  // }, [Navigate, workspaceError]);
 
   return (
     <AuthContext.Provider
